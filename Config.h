@@ -9,16 +9,16 @@
 #define BTN_NEXT    A3
 #define BTN_MODE    INPUT_PULLUP
 
-#define LCD_RS      7
-#define LCD_EN      6
-#define LCD_D4      5
-#define LCD_D5      4
-#define LCD_D6      3
-#define LCD_D7      2
+#define LCD_RS      8
+#define LCD_EN      9
+#define LCD_D4      4
+#define LCD_D5      5
+#define LCD_D6      6
+#define LCD_D7      7
 
 #define SD_CHIPSELECT   10
 
-#define SND_SPEAKER 8
-#define SND_OUTPUT  9
+#define SND_SPEAKER 2
+#define SND_OUTPUT  3
 
 #endif // __CONFIG_H__
