@@ -1,9 +1,12 @@
 #include "Config.h"
 #include "Texts.h"
 #include "Display.h"
-#include "Button.h"
 #include "SDCard.h"
 #include "Sound.h"
+
+#ifndef TOUCHSCREEN
+
+#include "Button.h"
 
 // Global Object
 
@@ -13,6 +16,8 @@ Button<BTN_PREV> buttonPrev(BTN_MODE);
 Button<BTN_NEXT> buttonNext(BTN_MODE);
 
 // Player State
+#endif
+
 
 #define MODE_BROWSE         0
 #define MODE_PLAYING        1
@@ -103,6 +108,7 @@ void setup()
 
 void loopBrowse()
 {
+  #ifndef TOUCHSCREEN
     buttonPlay.tick();
     buttonStop.tick();
     buttonPrev.tick();
@@ -157,8 +163,11 @@ void loopBrowse()
         nextFile();
         printFileInfo();
     }
-}
+  #endif
 
+}
+  
+    
 void loopPlaying()
 {
     // TZXLoop only runs if a file is playing, and keeps the buffer full.
@@ -182,7 +191,7 @@ void loopPlaying()
             }
         }
     }
-
+#ifndef TOUCHSCREEN
     buttonPlay.tick();
     buttonStop.tick();
 
@@ -194,6 +203,8 @@ void loopPlaying()
 
     if (buttonStop.press())
         stopFile();
+#endif
+
 }
 
 void loopPaused()
@@ -202,7 +213,7 @@ void loopPaused()
     noInterrupts();
     pauseSound(HIGH);
     interrupts();
-
+#ifndef TOUCHSCREEN
     buttonPlay.tick();
     buttonStop.tick();
 
@@ -214,6 +225,7 @@ void loopPaused()
 
     if (buttonStop.press())
         stopFile();
+#endif
 }
 
 void loop(void)

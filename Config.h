@@ -1,6 +1,7 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+#define TOUCHSCREEN
 // PIN Configuration
 
 #define BTN_PLAY    A2
