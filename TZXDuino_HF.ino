@@ -4,7 +4,7 @@
 #include "SDCard.h"
 #include "Sound.h"
 
-#ifndef TOUCHSCREEN
+#ifndef TOUCHSCREEN   // ========================  TOUCH =======================================
 
 #include "Button.h"
 
@@ -16,7 +16,7 @@ Button<BTN_PREV> buttonPrev(BTN_MODE);
 Button<BTN_NEXT> buttonNext(BTN_MODE);
 
 // Player State
-#endif
+#endif    // ========================  END =======================================
 
 
 #define MODE_BROWSE         0
@@ -108,7 +108,7 @@ void setup()
 
 void loopBrowse()
 {
-  #ifndef TOUCHSCREEN
+  #ifndef TOUCHSCREEN   // ========================  NOT TOUCH =======================================
     buttonPlay.tick();
     buttonStop.tick();
     buttonPrev.tick();
@@ -163,7 +163,7 @@ void loopBrowse()
         nextFile();
         printFileInfo();
     }
-  #endif
+  #endif   // ========================  END =======================================
 
 }
   
@@ -191,7 +191,7 @@ void loopPlaying()
             }
         }
     }
-#ifndef TOUCHSCREEN
+#ifndef TOUCHSCREEN   // ========================  NOT TOUCH =======================================
     buttonPlay.tick();
     buttonStop.tick();
 
@@ -203,7 +203,7 @@ void loopPlaying()
 
     if (buttonStop.press())
         stopFile();
-#endif
+#endif    // ========================  END =======================================
 
 }
 
@@ -213,7 +213,9 @@ void loopPaused()
     noInterrupts();
     pauseSound(HIGH);
     interrupts();
-#ifndef TOUCHSCREEN
+
+#ifndef TOUCHSCREEN  // ========================  NOT TOUCH =======================================
+
     buttonPlay.tick();
     buttonStop.tick();
 
@@ -225,7 +227,10 @@ void loopPaused()
 
     if (buttonStop.press())
         stopFile();
-#endif
+
+#endif    // ========================  END =======================================
+
+
 }
 
 void loop(void)
