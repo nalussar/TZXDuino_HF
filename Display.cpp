@@ -6,22 +6,18 @@
 #ifdef TOUCHSCREEN
 #include <MCUFRIEND_kbv.h>  // TFT Library
 #include <TouchScreen.h> // Added Touchscreen support
-
-
 #define MINPRESSURE 200
 #define MAXPRESSURE 1000
 
-const int XP=8,XM=A2,YP=A3,YM=9; //ID=0x9341
-const int TS_LEFT=110,TS_RT=914,TS_TOP=58,TS_BOT=904;
+#include "ButtonT.h"
 uint8_t Orientation = ORIENTATION;
-uint16_t ID, oldcolor, currentcolor;
-int16_t BOXSIZE, BOXLINE;
-bool touchButtonPlay, touchButtonStop, touchButtonPrev, touchButtonNext;
+uint16_t ID, oldcolor;
+
 
 MCUFRIEND_kbv tft;
 
-TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
-TSPoint tp; 
+
+
 
 bool setupDisplay()
 {
@@ -31,8 +27,8 @@ bool setupDisplay()
     tft.setRotation(1);
     tft.fillScreen(BLACK);
     tft.setTextColor(WHITE);
-    BOXSIZE = tft.width() / 4;
-    BOXLINE = tft.height() - BOXSIZE;
+    uint16_t BOXSIZE = tft.width() / 4;
+    uint16_t BOXLINE = tft.height() - BOXSIZE;
 
     // Control buttons
     tft.fillRect(0, BOXLINE, BOXSIZE, BOXSIZE, CYAN);
@@ -45,7 +41,6 @@ bool setupDisplay()
     printAt((BOXSIZE * 3) + 15, BOXLINE + 45, 1, "NEXT");
     // Mark active button
     tft.drawRect(0, BOXLINE, BOXSIZE, BOXSIZE, WHITE);
-    currentcolor = RED;  // Red button active by default (Stop)
     delay(1000);
 }
 

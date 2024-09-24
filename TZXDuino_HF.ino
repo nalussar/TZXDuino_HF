@@ -4,8 +4,9 @@
 #include "SDCard.h"
 #include "Sound.h"
 
-#ifndef TOUCHSCREEN   // ========================  TOUCH =======================================
+#ifndef TOUCHSCREEN   // ========================  NOT TOUCH =======================================
 
+#include "touch.h"
 #include "Button.h"
 
 // Global Object
@@ -18,6 +19,16 @@ Button<BTN_NEXT> buttonNext(BTN_MODE);
 // Player State
 #endif    // ========================  END =======================================
 
+#ifdef TOUCHSCREEN // ========================  NOT TOUCH =======================================
+
+bool touchButtonPlay, touchButtonStop, touchButtonPrev, touchButtonNext;
+// uint16_t currentcolor = RED;  // Red button active by default (Stop)
+
+Button<GREEN> buttonPlay(BOXLINE);
+Button<RED> buttonStop(BOXLINE);
+Button<CYAN> buttonPrev(BOXLINE);
+Button<YELLOW> buttonNext(BOXLINE);
+#endif  // ========================  END =======================================
 
 #define MODE_BROWSE         0
 #define MODE_PLAYING        1
@@ -164,7 +175,13 @@ void loopBrowse()
         printFileInfo();
     }
   #endif   // ========================  END =======================================
-
+  
+  #ifdef TOUCHSCREEN
+    buttonPlay.tick();
+    buttonStop.tick();
+    buttonPrev.tick();
+    buttonNext.tick();
+  #endif
 }
   
     
